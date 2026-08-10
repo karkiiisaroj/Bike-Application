@@ -1,6 +1,10 @@
+import 'package:bike_app/providers/bike_provider.dart';
+import 'package:bike_app/providers/dealer_provider.dart';
+import 'package:bike_app/screens/dealers/dealers_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/auth/auth_screen.dart';
+import 'screens/bikes/bikes_category_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/placeholder_screen.dart';
 import 'screens/story/our_story_screen.dart';
@@ -16,18 +20,22 @@ class AtelierApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => AuthController()..bootstrap(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthController()..bootstrap()),
+        ChangeNotifierProvider(create: (_) => BikeProvider()),
+        ChangeNotifierProvider(create: (_) => DealerProvider()),
+      ],
       child: MaterialApp(
         title: 'Atelier',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.dark,
         home: const AuthGate(),
-        routes: {'/story': (_) => const OurStoryScreen()},
-        // Any other tile (Bikes, Accessories, Rentals, etc.) isn't
-        // registered yet — instead of crashing with "could not find a
-        // generator for route," show a friendly placeholder until each
-        // one is built out.
+        routes: {
+          '/story': (_) => const OurStoryScreen(),
+          '/bikes': (_) => const BikesScreen(),
+          '/dealers': (_) => const DealerLocatorScreen(),
+        },
         onUnknownRoute: (settings) {
           final title = settings.name?.replaceFirst('/', '') ?? 'Page';
           return MaterialPageRoute(
