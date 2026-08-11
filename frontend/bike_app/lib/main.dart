@@ -1,6 +1,8 @@
 import 'package:bike_app/providers/bike_provider.dart';
 import 'package:bike_app/providers/dealer_provider.dart';
 import 'package:bike_app/screens/dealers/dealers_screen.dart';
+import 'package:bike_app/providers/rental_provider.dart';
+import 'package:bike_app/screens/rentals/rental_bike_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/auth/auth_screen.dart';
@@ -25,6 +27,7 @@ class AtelierApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthController()..bootstrap()),
         ChangeNotifierProvider(create: (_) => BikeProvider()),
         ChangeNotifierProvider(create: (_) => DealerProvider()),
+        ChangeNotifierProvider(create: (_) => RentalProvider()),
       ],
       child: MaterialApp(
         title: 'Atelier',
@@ -35,6 +38,7 @@ class AtelierApp extends StatelessWidget {
           '/story': (_) => const OurStoryScreen(),
           '/bikes': (_) => const BikesScreen(),
           '/dealers': (_) => const DealerLocatorScreen(),
+          '/rentals': (_) => const RentalBikeScreen(),
         },
         onUnknownRoute: (settings) {
           final title = settings.name?.replaceFirst('/', '') ?? 'Page';

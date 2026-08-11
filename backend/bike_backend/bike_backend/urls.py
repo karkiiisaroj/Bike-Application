@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/story/', include('story.urls')),
     path('api/bikes/', include('bikes.urls')),
     path('api/dealers/', include('dealers.urls')),
+    path('api/rentals/', include('rentals.urls')),
 ]
 
 if settings.DEBUG:

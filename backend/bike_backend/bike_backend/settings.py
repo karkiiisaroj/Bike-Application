@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'bikes',
+    'rentals',
     'dealers',
     'story',
 ]
