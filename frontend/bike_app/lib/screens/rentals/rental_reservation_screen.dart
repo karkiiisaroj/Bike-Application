@@ -288,7 +288,7 @@ class _RentalReservationScreenState extends State<RentalReservationScreen> {
                           const SizedBox(height: 12),
                           _SummaryRow(
                             label: 'Rate',
-                            value: '₹${bike.pricePerDay}/day',
+                            value: 'Rs ${bike.pricePerDay}/day',
                           ),
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 18),
@@ -308,7 +308,7 @@ class _RentalReservationScreenState extends State<RentalReservationScreen> {
                                 ),
                               ),
                               Text(
-                                '₹${booking.totalPrice}',
+                                'Rs ${booking.totalPrice}',
                                 style: const TextStyle(
                                   fontFamily: 'IBMPlexSans',
                                   fontSize: 22,

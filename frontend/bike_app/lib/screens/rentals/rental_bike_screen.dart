@@ -407,7 +407,7 @@ class _BikeCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
                   Text(
-                    '₹${bike.pricePerDay}/day',
+                    'Rs ${bike.pricePerDay}/day',
                     style: const TextStyle(
                       fontFamily: 'IBMPlexSans',
                       fontSize: 14,

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'bikes',
     'rentals',
     'dealers',
+    'journal',
     'story',
 ]
 

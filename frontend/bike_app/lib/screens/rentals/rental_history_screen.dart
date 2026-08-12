@@ -200,7 +200,7 @@ class _RentalHistoryScreenState extends State<RentalHistoryScreen> {
                                     ),
                                   ),
                                   Text(
-                                    '₹${r.totalPrice}',
+                                    'Rs ${r.totalPrice}',
                                     style: const TextStyle(
                                       fontFamily: 'IBMPlexSans',
                                       fontWeight: FontWeight.w700,
