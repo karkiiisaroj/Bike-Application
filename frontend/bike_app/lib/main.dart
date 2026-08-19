@@ -1,6 +1,8 @@
 import 'package:bike_app/providers/bike_provider.dart';
+import 'package:bike_app/providers/cart_provider.dart';
 import 'package:bike_app/providers/dealer_provider.dart';
 import 'package:bike_app/providers/journal_provider.dart';
+import 'package:bike_app/screens/accessories/accessories_screen.dart';
 import 'package:bike_app/screens/dealers/dealers_screen.dart';
 import 'package:bike_app/providers/rental_provider.dart';
 import 'package:bike_app/screens/journal/journal_screen.dart';
@@ -31,9 +33,10 @@ class AtelierApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DealerProvider()),
         ChangeNotifierProvider(create: (_) => RentalProvider()),
         ChangeNotifierProvider(create: (_) => JournalProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: MaterialApp(
-        title: 'Atelier',
+        title: 'Royal Enfield',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.dark,
         home: const AuthGate(),
@@ -43,6 +46,7 @@ class AtelierApp extends StatelessWidget {
           '/dealers': (_) => const DealerLocatorScreen(),
           '/rentals': (_) => const RentalBikeScreen(),
           '/journal': (_) => const JournalScreen(),
+          '/accessories': (_) => const AccessoriesScreen(),
         },
         onUnknownRoute: (settings) {
           final title = settings.name?.replaceFirst('/', '') ?? 'Page';
