@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from bikes.views import upload_frames_page
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -28,7 +29,7 @@ urlpatterns = [
     path('api/rentals/', include('rentals.urls')),
     path('api/journal/', include('journal.urls')),
     path('api/accessories/', include('accessories.urls')),
-    
+    path('bikes/upload-frames/', upload_frames_page, name='upload-frames'),
 ]
 
 if settings.DEBUG:

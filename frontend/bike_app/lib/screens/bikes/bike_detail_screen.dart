@@ -1,5 +1,7 @@
 import 'package:bike_app/models/bike_model.dart';
+import 'package:bike_app/screens/bikes/bike_360_viewer_screen.dart';
 import 'package:bike_app/theme/theme.dart';
+import 'package:bike_app/widgets/bike_media_viewer.dart';
 import 'package:flutter/material.dart';
 
 /// Detail screen for a single bike, reached from the Explore button on
@@ -21,30 +23,37 @@ class BikeDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: double.infinity,
-                height: 280,
-                decoration: const BoxDecoration(
-                  gradient: RadialGradient(
-                    center: Alignment.center,
-                    radius: 0.8,
-                    colors: [Color(0x22C08A3E), Colors.transparent],
-                  ),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Image.network(
-                  bike.heroImage,
-                  fit: BoxFit.contain,
-                  loadingBuilder: (context, child, progress) {
-                    if (progress == null) return child;
-                    return const Center(
-                      child: CircularProgressIndicator(color: AppColors.brass),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) => const Icon(
-                    Icons.two_wheeler,
-                    size: 160,
-                    color: AppColors.mutedDark,
+              // Was a raw Image.network — now goes through BikeMediaViewer
+              // so swapping in the 3D/rotatable viewer later is a one-file
+              // change (see bike_media_viewer.dart).
+              BikeMediaViewer(bike: bike, height: 280),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton.icon(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => Bike360ViewerScreen(bike: bike),
+                        ),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.threed_rotation,
+                      color: AppColors.brass,
+                      size: 18,
+                    ),
+                    label: const Text(
+                      'VIEW IN 360°',
+                      style: TextStyle(
+                        fontFamily: 'IBMPlexSans',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.2,
+                        color: AppColors.brass,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -83,6 +92,35 @@ class BikeDetailScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+
+                    const SizedBox(height: 20),
+                    OutlinedButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => Bike360ViewerScreen(bike: bike),
+                          ),
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: AppColors.brass),
+                      ),
+                      icon: const Icon(
+                        Icons.threesixty,
+                        size: 18,
+                        color: AppColors.brass,
+                      ),
+                      label: const Text(
+                        '360° VIEW',
+                        style: TextStyle(
+                          fontFamily: 'IBMPlexSans',
+                          fontSize: 12,
+                          letterSpacing: 1,
+                          color: AppColors.brass,
+                        ),
+                      ),
+                    ),
+
                     const SizedBox(height: 24),
                     // TODO: once Bike has real fields (price, engine,
                     // description, colours, etc.), render them here —
